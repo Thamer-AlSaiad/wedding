@@ -121,15 +121,20 @@
     fadeFrame = requestAnimationFrame(step);
   }
 
+  let musicReady = false;
+
   function startMusic() {
-    if (!cfg.music) return;
+    if (!musicReady) return;
     if (!audio.src) audio.src = cfg.music;
     audio.volume = 0;
     audio.play().then(() => { setMusicUi(true); fadeTo(0.55, 1500); }).catch(() => setMusicUi(false));
   }
 
   if (cfg.music) {
-    musicBtn.hidden = false;
+    // Only offer music once the file is really there.
+    fetch(cfg.music, { method: "HEAD" })
+      .then((r) => { if (r.ok) { musicReady = true; musicBtn.hidden = false; } })
+      .catch(() => {});
     musicBtn.addEventListener("click", () => {
       if (audio.paused) startMusic();
       else { setMusicUi(false); fadeTo(0, 300, () => audio.pause()); }

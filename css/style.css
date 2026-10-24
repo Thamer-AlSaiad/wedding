@@ -72,10 +72,32 @@ a { color: inherit; }
 .icon-btn .mute { display: none; }
 .icon-btn[aria-pressed="false"] .mute { display: inline; }
 
+/* ---------- Flowers and butterflies frame ---------- */
+.decor { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.spray { position: absolute; height: auto; }
+.spray-tr { top: 0; right: 0; width: min(58vw, 240px); }
+.spray-bl { bottom: 0; left: 0; width: min(48vw, 200px); transform: rotate(180deg); }
+.butterfly { position: absolute; width: 34px; overflow: visible; animation: drift 9s ease-in-out infinite; }
+.butterfly .wing path { fill: #DCE5F0; stroke: var(--accent); stroke-opacity: .55; stroke-width: 1; }
+.butterfly .wing circle { fill: var(--accent); fill-opacity: .55; }
+.butterfly .bf-body { fill: var(--accent); stroke: var(--accent); stroke-width: .8; stroke-linecap: round; }
+.butterfly .wing { transform-box: fill-box; animation: flap 520ms ease-in-out infinite alternate; }
+.butterfly .wl { transform-origin: right center; }
+.butterfly .wr { transform-origin: left center; }
+.bf-1 { top: 17%; left: 9%; transform: rotate(-14deg); }
+.bf-2 { bottom: 21%; right: 7%; width: 26px; animation-duration: 11s; animation-delay: -4s; }
+.bf-2 .wing { animation-duration: 640ms; }
+@keyframes flap { to { transform: scaleX(.42); } }
+@keyframes drift {
+  0%, 100% { translate: 0 0; rotate: -8deg; }
+  33% { translate: 10px -14px; rotate: 6deg; }
+  66% { translate: -8px -6px; rotate: -2deg; }
+}
+
 /* ---------- Screens ---------- */
 main { height: 100%; }
 .screen {
-  position: fixed; inset: 0;
+  position: fixed; inset: 0; z-index: 1;
   display: flex; flex-direction: column;
   padding-top: calc(env(safe-area-inset-top, 0px) + 68px);
 }
@@ -91,6 +113,8 @@ main { height: 100%; }
 .screen-body > :first-child { margin-top: auto; }
 .screen-body > :last-child { margin-bottom: auto; }
 .screen-body.start { align-items: stretch; text-align: right; }
+/* Keeps text crisp where it crosses the flowers. */
+.screen-body > p, .screen-body > h1, .screen-body > h2, .hosts, .date { text-shadow: 0 0 2px var(--paper), 0 0 8px var(--paper), 0 0 14px var(--paper); }
 .screen-body.start > :first-child { margin-top: 0; }
 
 .actions {
@@ -249,12 +273,18 @@ main { height: 100%; }
 .pill { flex: none; min-width: 64px; padding: 6px 0; border-radius: 10px; text-align: center; font-size: 14px; font-weight: 600; color: var(--accent); background: var(--accent-wash); }
 
 /* ---------- Place ---------- */
-.night { position: relative; width: 100%; margin: 18px 0 0; aspect-ratio: 342 / 172; border-radius: 20px; overflow: hidden; background: var(--accent); }
-.night svg { width: 100%; height: 100%; display: block; }
+.night { position: relative; display: block; width: 100%; margin: 18px 0 0; aspect-ratio: 342 / 172; border-radius: 20px; overflow: hidden; background: var(--accent); text-decoration: none; transition: transform 140ms ease-out; }
+.night:active { transform: scale(.98); }
+.night-cta {
+  position: absolute; left: 50%; bottom: 10px; translate: -50% 0; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+  background: rgba(255, 255, 255, .16); color: #FFFFFF; font-size: 12px; font-weight: 500;
+}
+.night-cta svg { fill: none; stroke: #FFFFFF; stroke-width: 1.8; }
+.night > svg { width: 100%; height: 100%; display: block; }
 .night .route { fill: none; stroke: #FFFFFF; stroke-opacity: .7; stroke-width: 1.2; stroke-dasharray: 2 6; stroke-linecap: round; animation: travel 6s linear infinite; }
 @keyframes travel { to { stroke-dashoffset: 64; } }
 .night text { fill: #FFFFFF; font-family: var(--ui); font-size: 12px; }
-.night figcaption { position: absolute; right: 14px; bottom: 10px; font-size: 11px; color: rgba(255, 255, 255, .8); }
 .halls { width: 100%; margin-top: 12px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .halls .card { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 16px; text-align: right; }
 .halls strong { font-weight: 600; }
@@ -323,6 +353,8 @@ main { height: 100%; }
 
 /* Short phones (iPhone SE and similar): tighten the vertical rhythm so most screens fit without scrolling. */
 @media (max-height: 720px) {
+  .spray-tr { width: min(42vw, 160px); }
+  .spray-bl { width: min(36vw, 135px); }
   .screen { padding-top: calc(env(safe-area-inset-top, 0px) + 60px); }
   .actions { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); }
   .arch { width: 190px; }

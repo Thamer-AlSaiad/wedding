@@ -12,8 +12,8 @@ window.INVITATION = {
     home: ""
   },
 
-  // Path to the music file, e.g. "assets/music.mp3". Leave empty to hide the music button.
-  music: "",
+  // Upload the track to this path in the repo; the music button appears once the file exists.
+  music: "assets/music.mp3",
 
   // Google Form. Leave action empty and the RSVP step stays hidden (v1).
   form: {

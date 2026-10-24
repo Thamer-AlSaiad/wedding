@@ -24,6 +24,21 @@
 <script src="js/app.js" defer></script>
 </head>
 <body>
+<div class="decor" aria-hidden="true">
+  <img class="spray spray-tr" src="assets/flowers.svg" alt="">
+  <img class="spray spray-bl" src="assets/flowers.svg" alt="">
+  <svg class="butterfly bf-1" viewBox="-30 -26 60 50">
+    <g class="wing wl"><path d="M-2 -2C-9 -19 -23 -27 -27 -17C-30 -7 -19 0 -2 0Z"/><path d="M-2 2C-12 2 -22 8 -20 16C-18 22 -8 18 -2 4Z"/><circle cx="-18" cy="-14" r="1.6"/></g>
+    <g class="wing wr"><path d="M2 -2C9 -19 23 -27 27 -17C30 -7 19 0 2 0Z"/><path d="M2 2C12 2 22 8 20 16C18 22 8 18 2 4Z"/><circle cx="18" cy="-14" r="1.6"/></g>
+    <path class="bf-body" d="M0 -8C-1.6 -4 -1.6 10 0 15C1.6 10 1.6 -4 0 -8ZM-.6 -8Q-4 -15 -7 -17M.6 -8Q4 -15 7 -17"/>
+  </svg>
+  <svg class="butterfly bf-2" viewBox="-30 -26 60 50">
+    <g class="wing wl"><path d="M-2 -2C-9 -19 -23 -27 -27 -17C-30 -7 -19 0 -2 0Z"/><path d="M-2 2C-12 2 -22 8 -20 16C-18 22 -8 18 -2 4Z"/><circle cx="-18" cy="-14" r="1.6"/></g>
+    <g class="wing wr"><path d="M2 -2C9 -19 23 -27 27 -17C30 -7 19 0 2 0Z"/><path d="M2 2C12 2 22 8 20 16C18 22 8 18 2 4Z"/><circle cx="18" cy="-14" r="1.6"/></g>
+    <path class="bf-body" d="M0 -8C-1.6 -4 -1.6 10 0 15C1.6 10 1.6 -4 0 -8ZM-.6 -8Q-4 -15 -7 -17M.6 -8Q4 -15 7 -17"/>
+  </svg>
+</div>
+
 <div class="bar" id="bar" hidden>
   <div class="progress" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <button class="icon-btn" id="musicBtn" type="button" aria-label="تشغيل الموسيقى" aria-pressed="false" hidden>
@@ -107,8 +122,7 @@
       <p class="lead r" style="--i:2">بدعوتكم لحضور حفل زفاف ووليمة عشاء ولديهما</p>
       <div class="ornament r" style="--i:3" aria-hidden="true"><span></span><svg width="10" height="10" viewBox="0 0 10 10"><path d="M5 0l5 5-5 5-5-5Z"/></svg><span></span></div>
       <h2 class="names names-lg r" style="--i:4">صدام و كريمته</h2>
-      <p class="muted small r" style="--i:5">صدام حسين المرعي</p>
-      <p class="lead strong r" style="--i:6">بحضوركم نزداد سروراً</p>
+      <p class="lead strong r" style="--i:5">بحضوركم نزداد سروراً</p>
     </div>
     <div class="actions">
       <a class="btn" href="#date" data-go="date">موعد الحفل</a>
@@ -155,7 +169,7 @@
       <p class="muted small r" style="--i:0">نلتقي بكم في</p>
       <h2 class="title r" style="--i:1">صالة ليالي النجوم</h2>
       <p class="muted r" style="--i:2">غربي كفر عويد · شمال طريق الرام</p>
-      <figure class="night r" style="--i:3">
+      <a class="night r" style="--i:3" id="hallMap" href="#" target="_blank" rel="noopener" aria-label="افتح موقع صالة ليالي النجوم على الخرائط">
         <svg viewBox="0 0 342 172" aria-hidden="true">
           <g class="stars" fill="#FFFFFF"><circle cx="30" cy="24" r="1"/><circle cx="160" cy="18" r="1.3"/><circle cx="300" cy="30" r="1"/><circle cx="110" cy="150" r="1.1"/><circle cx="250" cy="146" r="1"/><circle cx="20" cy="120" r="1.2"/></g>
           <path class="route" d="M290 104L236 66L184 92L132 52L72 70"/>
@@ -167,8 +181,8 @@
           <text x="290" y="132" text-anchor="middle">منزل العريس</text>
           <text x="72" y="106" text-anchor="middle" font-weight="600">الصالة</text>
         </svg>
-        <figcaption>رسم تعبيري</figcaption>
-      </figure>
+        <span class="night-cta"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.5-7-11.5a7 7 0 0 1 14 0C19 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>اضغط لفتح الموقع على الخرائط</span>
+      </a>
       <div class="halls r" style="--i:4">
         <div class="card"><span class="muted small">قسم</span><strong>صالة الرجال</strong></div>
         <div class="card"><span class="muted small">قسم</span><strong>صالة النساء</strong></div>
@@ -180,8 +194,6 @@
     </div>
     <div class="actions stack">
       <div class="row two">
-        <a class="btn-sec" id="hallMap" href="#" target="_blank" rel="noopener">
-          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.5-7-11.5a7 7 0 0 1 14 0C19 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>موقع الصالة</a>
         <a class="btn-sec" id="homeMap" href="#" target="_blank" rel="noopener" hidden>
           <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4Z"/></svg>منزل العريس</a>
       </div>
