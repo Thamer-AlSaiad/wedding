@@ -136,6 +136,7 @@ main { height: 100%; }
   color: var(--accent);
 }
 .names-lg { font-size: clamp(44px, 14vw, 56px); line-height: 2.2; }
+.names-xl { font-size: clamp(54px, 17vw, 72px); line-height: 2.1; }
 .title { font-size: 26px; font-weight: 600; line-height: 1.4; text-wrap: balance; }
 .lead { font-size: 17px; line-height: 1.8; text-wrap: balance; }
 .lead.strong { font-weight: 500; margin-top: 26px; }
