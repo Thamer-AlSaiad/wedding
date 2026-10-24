@@ -1,6 +1,6 @@
 # دعوة زفاف صدام وكريمته
 
-Live: https://thamer-alsaiad.github.io/wedding/
+Live: https://saddam-wedding.vercel.app/
 
 A static wedding invitation: sealed envelope, Basmala and verse, the invitation, date with countdown and calendar, and the hall location. No build step; GitHub Pages serves the files as they are.
 
