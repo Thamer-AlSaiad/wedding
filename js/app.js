@@ -16,10 +16,13 @@
   let current = "envelope";
   let switching = false;
   let depth = 0; // screens pushed in this visit, so Back never leaves the site
+  let musicStarted = false; // the music starts once, on the first tap after the verse
 
   /* ---------- Screens ---------- */
   function updateBar(id) {
     bar.hidden = id === "envelope";
+    // Keep the verse screen quiet: no music control until the music has started.
+    bar.classList.toggle("quiet", id === "verse" && !musicStarted);
     $$(".progress span").forEach((s, i) => s.classList.toggle("on", i < (STEP[id] || 0)));
   }
 
@@ -54,7 +57,12 @@
 
   document.addEventListener("click", (e) => {
     const link = e.target.closest("[data-go]");
-    if (link) { e.preventDefault(); go(link.dataset.go); return; }
+    if (link) {
+      e.preventDefault();
+      if (!musicStarted && current !== "envelope") { musicStarted = true; startMusic(); } // inside the tap, so browsers allow the audio
+      go(link.dataset.go);
+      return;
+    }
     if (e.target.closest("[data-back]")) {
       if (depth > 0) history.back();
       else go(ORDER[Math.max(1, ORDER.indexOf(current) - 1)]);
@@ -79,7 +87,6 @@
   $("#seal").addEventListener("click", async () => {
     if (switching) return;
     switching = true;
-    startMusic(); // inside the tap, so browsers allow the audio
     envScreen.classList.add("opening");
     env.classList.add("broken");
     await wait(t(260));
@@ -136,6 +143,7 @@
       .then((r) => { if (r.ok) { musicReady = true; musicBtn.hidden = false; } })
       .catch(() => {});
     musicBtn.addEventListener("click", () => {
+      musicStarted = true;
       if (audio.paused) startMusic();
       else { setMusicUi(false); fadeTo(0, 300, () => audio.pause()); }
     });
